@@ -11,6 +11,7 @@ Siyu Gao, [Yunbo Wang](https://wyb15.github.io/)<sup>†</sup>, [Xiaokang Yang](
 git clone https://github.com/gsyyysg/StockFormer.git
 cd StockFormer
 conda env create -f environment.yaml
+conda activate StockFormer
 pip install -r requirements.txt
 ```
 
@@ -58,6 +59,7 @@ sh train_pred_short.sh
 1) train SAC model (three state inference module's path can be changed in *train_rl.py* file)
 
 ```bash
+cd code
 python train_rl.py
 ```
 
