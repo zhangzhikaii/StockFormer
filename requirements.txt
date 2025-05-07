@@ -6,7 +6,7 @@ statsmodels==0.13.2
 stockstats==0.3.2
 tensorboardX==2.5
 torch==1.9.1
-torchvision==0.2.2
+torchvision==0.10.1
 tqdm==4.64.0
 wrapt==1.14.1
 wrds==3.1.6
