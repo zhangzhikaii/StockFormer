@@ -10,6 +10,7 @@ Siyu Gao, [Yunbo Wang](https://wyb15.github.io/)<sup>†</sup>, [Xiaokang Yang](
 ```
 git clone https://github.com/gsyyysg/StockFormer.git
 cd StockFormer
+conda env create -f environment.yaml
 pip install -r requirements.txt
 ```
 
