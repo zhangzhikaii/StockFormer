@@ -1,5 +1,8 @@
-START_DATE = "2010-01-01"
-END_DATE = "2022-05-07"
+# START_DATE = "2010-01-01"
+# END_DATE = "2022-05-07"
+
+START_DATE = "2012-01-03"
+END_DATE = "2022-12-30"
 
 INF = 1100
 
@@ -127,9 +130,16 @@ USE_CSI_300_TICKET = ['600519.SS',
  '002050.SZ',
  '002179.SZ']
 
+USE_test_TICKET = ['^GSPC',
+'^DJI',
+'^IXIC',
+'USO',
+'GLD']
 
-use_ticker_dict = {'CSI':USE_CSI_300_TICKET, 'TEST': USE_CSI_300_TICKET[:5]}
+use_ticker_dict = {'CSI':USE_CSI_300_TICKET, 'TEST': USE_CSI_300_TICKET[:5], 'tickers_test': USE_test_TICKET}
 
 CSI_date = ['20110419', '20181228', '20180102', '20201231',  '20190402', '20211231']
 
-date_dict = {'CSI': CSI_date, 'TEST': CSI_date}
+test_date = ['20130606', '20181228', '20180102', '20201231',  '20190402', '20221230'] # 这里由于lookback的问题，开始的日期会比实际数据日期晚，可以留多一点时间不然也会报错
+
+date_dict = {'CSI': CSI_date, 'TEST': CSI_date, 'tickers_test': test_date}
