@@ -7,9 +7,9 @@ import pdb
 import sys
 
 sys.path.append('Transformer/')
-from ..models.transformer_layer import EncoderLayer, DecoderLayer, Encoder, Decoder
-from ..models.attn import FullAttention, AttentionLayer
-from ..models.embed import DataEmbedding
+from models.transformer_layer import EncoderLayer, DecoderLayer, Encoder, Decoder
+from models.attn import FullAttention, AttentionLayer
+from models.embed import DataEmbedding
 
 class Transformer_base(nn.Module):
     def __init__(self, enc_in, dec_in, c_out,
