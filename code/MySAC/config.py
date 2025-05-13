@@ -157,13 +157,17 @@ USE_CSI_300_TICKET = ['600519.SS',
  '002050.SZ',
  '002179.SZ']
 
+USE_test_TICKET = ['^GSPC',
+'^DJI',
+'^IXIC',
+'USO',
+'GLD']
 
+use_ticker_dict = {'CSI':USE_CSI_300_TICKET, 'TEST': USE_CSI_300_TICKET[:5], 'tickers_test': USE_test_TICKET}
 
-use_ticker_dict = {'CSI':USE_CSI_300_TICKET, 'TEST': USE_CSI_300_TICKET[:5]}
+# CSI_date = ['20110117', '20180801', '20180508', '20201231',  '20210104', '20220426']
 
-CSI_date = ['20110117', '20180801', '20180508', '20201231',  '20210104', '20220426']
-
-date_dict = {'CSI': CSI_date, 'TEST': CSI_date}
+# date_dict = {'CSI': CSI_date, 'TEST': CSI_date}
 
 
 time_window_start = [59,

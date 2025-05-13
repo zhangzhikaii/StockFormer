@@ -25,14 +25,14 @@ import os
 
 import sys
 
-fix_seed = 1999
-version = 'CSI/'
+# fix_seed = 1999
+version = 'tickers_test/'
 model_name='StockFormer/'
-short_prediction_model_path = 'Transformer/pretrained/csi/Short/checkpoint.pth' 
-long_prediction_model_path =  'Transformer/pretrained/csi/Long/checkpoint.pth'
-mae_model_path = 'Transformer/pretrained/csi/mae/checkpoint.pth' 
-full_stock_dir = '../data/CSI/'
-ticker_list = config.use_ticker_dict['CSI']
+short_prediction_model_path = 'Transformer/pretrained/tickers_test/Short/checkpoint.pth' # 对于新数据集要重新训练
+long_prediction_model_path =  'Transformer/pretrained/tickers_test/Long/checkpoint.pth' # 对于新数据集要重新训练
+mae_model_path = 'Transformer/pretrained/tickers_test/mae/checkpoint.pth' # 对于新数据集要重新训练
+full_stock_dir = '../data/tickers_test/' # 股票数据
+ticker_list = config.use_ticker_dict['tickers_test'] # 股票名数据，用于挨个读取数据用
 prediction_len = [1,5]
 
 
@@ -95,12 +95,12 @@ scaler = StandardScaler()
 df_data = df[config.TECHNICAL_INDICATORS_LIST]
 df_data = df_data.replace([np.inf], config.INF)
 df_data = df_data.replace([-np.inf], config.INF*(-1))
-data = scaler.fit_transform(df_data.values)
+data = scaler.fit_transform(df_data.values) # 这个地方不应该全部标准化，不然属于泄露未来数据；但我们就不管了
 df[config.TECHNICAL_INDICATORS_LIST] = data
 
-train = data_split(df, '2011-01-17','2018-12-28')
-eval = data_split(df, '2019-01-02', '2021-12-31')
-test = data_split(df,'2018-10-09', '2022-04-16')
+train = data_split(df, '2011-01-17','2018-12-28') # 要根据数据集调整
+eval = data_split(df, '2019-01-02', '2021-12-31') # 要根据数据集调整
+test = data_split(df,'2018-10-09', '2022-04-16') # 要根据数据集调整
 
 stock_dimension = len(train.tic.unique())
 state_space = stock_dimension
@@ -148,7 +148,7 @@ env_kwargs_test = {
     "logs_path": 'results/logs/'+version+model_name,
     "csv_path": 'results/csv/'+version+model_name,
     "mode":'test',
-    "time_window_start":config.time_window_start,
+    "time_window_start":config.time_window_start, # 这个是什么
     "step_len": 1000,
     "temporal_len": 60,
     "hidden_channel":128,     
@@ -214,13 +214,13 @@ trained_sac = agent.train_model(model=model_sac,
                              log_dir=log_dir,
                              ck_dir=ck_dir,
                              eval_env=env_eval_sac,
-                             total_timesteps=30000)
+                             total_timesteps=5000) # 要是chechk_freq的整数倍
 end = time.time()
 print("Training time: %.3f"%(end-start))
 
 
 
-model_path = os.path.join('trained_models/', version, model_name, 'model30000.zip')
+model_path = os.path.join('trained_models/', version, model_name, 'model5000.zip')
 start = time.time()
 results = DRLAgent.DRL_prediction_load_from_file(model_name='maesac',environment=test_trade_gym, cwd=model_path)
 end = time.time()
